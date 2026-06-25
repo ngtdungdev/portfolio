@@ -1,0 +1,49 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: 'master' # Kích hoạt khi bạn push code lên nhánh master
+
+# Cấp quyền cho GitHub Actions tiến hành deploy
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout mã nguồn
+        uses: actions/checkout@v4
+
+      - name: Khởi tạo môi trường Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Cài đặt thư viện
+        run: npm install
+
+      - name: Biên dịch dự án (Build Vite)
+        run: npm run build
+
+      - name: Cấu hình GitHub Pages
+        uses: actions/configure-pages@v4
+
+      - name: Tải sản phẩm lên hệ thống
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist' # Thư mục chứa code sau khi build của Vite
+
+      - name: Xuất bản lên Tên miền công cộng
+        id: deployment
+        uses: actions/deploy-pages@v4
