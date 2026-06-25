@@ -1,5 +1,9 @@
+import Header from "./components/Header.tsx";
+
 const App = () => {
-    return <h1>Hello</h1>
+    return (
+      <Header/>
+    )
 }
 export default App;
 

@@ -1,11 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* BASE */
+/* 1. THAY THẾ TOÀN BỘ @tailwind BẰNG @import */
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+}
+
+/* 2. KHAI BÁO PLUGIN (Nếu bạn vẫn muốn dùng plugin ngoài) */
+@plugin "tailwind-scrollbar";
+
+/* BASE STYLES */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-zinc-900 text-zinc-50
+  /* 3. TỐI ƯU HÓA CLASS */
+  @apply bg-zinc-900 text-zinc-50 ;
 }
