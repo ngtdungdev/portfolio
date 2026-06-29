@@ -1,10 +1,12 @@
-import React from 'react';
-
+// @ts-ignore
 import PropTypes from 'prop-types';
 
+// @ts-ignore
 const ProjectCard = ({imgSrc, title, tags, projectLink, classes}) => {
+    // @ts-ignore
     return (
-        <div className={"relative p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700/60 ring-1 ring-inset ring-zinc-50/5 transition-colors" + classes}>
+        <div
+            className={"relative p-4 rounded-2xl bg-zinc-800 hover:bg-zinc-700/60 ring-1 ring-inset ring-zinc-50/5 transition-colors" + classes}>
             <figure className="img-box aspect-square rounded-lg mb-4">
                 <img src={imgSrc} alt={title} loading='lazy' className="img-cover"/>
             </figure>
@@ -14,10 +16,8 @@ const ProjectCard = ({imgSrc, title, tags, projectLink, classes}) => {
                         {title}
                     </h3>
                     <div className="flex flex-wrap items-center gap-2">
-                        {tags?.map((label, key) => (
-                            <span key={key} className="h-8 text-zinc-400 bg-zinc-50/5 grid items-center px-3 rounded-lg">
-                                {label}
-                            </span>
+                        {Array.isArray(tags) && tags.map((label, index) => (
+                            <span key={`${label}-${index}`} className="inline-flex items-center h-8 text-sm text-zinc-400 bg-zinc-50/5 px-3 rounded-lg">{label}</span>
                         ))}
                     </div>
                 </div>
