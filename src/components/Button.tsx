@@ -1,5 +1,8 @@
+// @ts-ignore
 import PropTypes from 'prop-types';
-const ButtonPrimary = ({href, target, label, icon, classes}) => {
+// Primary_Button
+// @ts-ignore
+const ButtonPrimary = ({ href, target = '_self', label, icon, classes = "" }) => {
     if (href) {
         return (
             <a href={href} target={target} className={"btn btn-primary" + classes}>
@@ -21,7 +24,7 @@ const ButtonPrimary = ({href, target, label, icon, classes}) => {
     }
 }
 
-ButtonPrimary.prototypes = {
+ButtonPrimary.propTypes = {
     label: PropTypes.string.isRequired,
     href: PropTypes.string,
     target: PropTypes.string,
@@ -29,4 +32,36 @@ ButtonPrimary.prototypes = {
     classes: PropTypes.string,
 }
 
-export {ButtonPrimary}
+// Outline_Button
+// @ts-ignore
+const ButtonOutline = ({ href, target = '_self', label, icon, classes = "" }) => {
+    if (href) {
+        return (
+            <a href={href} target={target} className={"btn btn-outline" + classes}>
+                {label}
+                {icon ? <span className="material-symbols-rounded" aria-hidden="true">
+                    {icon}</span> : undefined
+                }
+            </a>
+        )
+    } else {
+        return (
+            <button className={"btn btn-outline" + classes}>
+                {label}
+                {icon ? <span className="material-symbols-rounded" aria-hidden="true">
+                    {icon}</span> : undefined
+                }
+            </button>
+        )
+    }
+}
+
+ButtonOutline.propTypes = {
+    label: PropTypes.string.isRequired,
+    href: PropTypes.string,
+    target: PropTypes.string,
+    icon: PropTypes.string,
+    classes: PropTypes.string,
+}
+
+export {ButtonPrimary, ButtonOutline}
